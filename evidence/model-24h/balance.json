@@ -1,0 +1,249 @@
+[
+  {
+    "case": "reference",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      39,
+      119
+    ],
+    "predator_range": [
+      2,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 28.61
+  },
+  {
+    "case": "actual_room",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      66,
+      124
+    ],
+    "predator_range": [
+      1,
+      7
+    ],
+    "plants_range": [
+      985,
+      998
+    ],
+    "capacity_blocks": 0,
+    "seconds": 33.78
+  },
+  {
+    "case": "fresh",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      52,
+      105
+    ],
+    "predator_range": [
+      3,
+      10
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 26.67
+  },
+  {
+    "case": "co2_1000",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      45,
+      101
+    ],
+    "predator_range": [
+      3,
+      10
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 28.36
+  },
+  {
+    "case": "co2_2000",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      25,
+      115
+    ],
+    "predator_range": [
+      2,
+      8
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 29.64
+  },
+  {
+    "case": "co2_5000",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      60,
+      122
+    ],
+    "predator_range": [
+      2,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 29.28
+  },
+  {
+    "case": "pressure_low",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      41,
+      101
+    ],
+    "predator_range": [
+      5,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 27.31
+  },
+  {
+    "case": "pressure_high",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      19,
+      106
+    ],
+    "predator_range": [
+      4,
+      10
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 27.12
+  },
+  {
+    "case": "ventilation",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      37,
+      111
+    ],
+    "predator_range": [
+      3,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 27.42
+  },
+  {
+    "case": "spikes",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      55,
+      115
+    ],
+    "predator_range": [
+      3,
+      10
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 28.11
+  },
+  {
+    "case": "missing_co2",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      39,
+      119
+    ],
+    "predator_range": [
+      2,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 26.77
+  },
+  {
+    "case": "day_night",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      49,
+      116
+    ],
+    "predator_range": [
+      3,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 18.56
+  },
+  {
+    "case": "warm_dry_dim",
+    "runs": 20,
+    "both_survived": 0,
+    "herb_range": [
+      0,
+      0
+    ],
+    "predator_range": [
+      0,
+      0
+    ],
+    "plants_range": [
+      441,
+      486
+    ],
+    "capacity_blocks": 0,
+    "seconds": 3.61
+  }
+]

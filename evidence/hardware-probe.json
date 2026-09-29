@@ -1,0 +1,12 @@
+{
+  "pairs": 90,
+  "success": 90,
+  "max_slice_us": 4324,
+  "max_environment_us": 292,
+  "max_step_us": 524876,
+  "min_stack_gap": 413,
+  "latency_median_ms": 250.5,
+  "latency_p95_ms": 779,
+  "air_level_first": 24,
+  "air_level_last": 29
+}

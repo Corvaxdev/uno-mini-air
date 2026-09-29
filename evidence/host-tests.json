@@ -1,0 +1,14 @@
+{
+  "terra": [
+    "PASS invariants, pond, shelter, night debounce, fallback, action validation, cooldown, credits, capacity, snapshot bounds, reader independence, millis wrap; sizeof(Terra)=584"
+  ],
+  "air": [
+    "PASS 666470 arithmetic/regression cases; max CO2 step bounded; invalid input fallback; monotonic responses; baseline snapshots identical."
+  ],
+  "http": [
+    "PASS seven GET routes, 4096 action codes, retired Guide route"
+  ],
+  "header": [
+    "PASS 720 header cases: freshness, zero/max values, body length, buffer guards"
+  ]
+}

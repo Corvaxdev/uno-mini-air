@@ -1,0 +1,32 @@
+name: Build and host checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: arduino/setup-arduino-cli@v2
+        with:
+          version: '1.5.1'
+      - run: python -m pip install -r requirements-build.txt
+      - run: npm ci
+      - run: arduino-cli core update-index
+      - run: arduino-cli core install arduino:avr@1.8.8
+      - run: python tests/run.py --output build-host-tests
+      - run: python tools/rebuild.py --output build-public
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verification-reports
+          path: |
+            build-public/rebuild-result.json
+            build-host-tests/results.json
+            build-host-tests/*.log

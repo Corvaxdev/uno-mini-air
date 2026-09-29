@@ -1,0 +1,2 @@
+zopfli==0.4.1
+# Optional, only for make_font.py without --compact: fonttools / brotli.

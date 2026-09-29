@@ -1,0 +1,26 @@
+{
+  "reference": "0.12.6-terra",
+  "unchanged_files": {
+    "firmware/UnoMiniEthernet/Terra.h": "9dd5a8a4b6be3f2c58d0b9287117e500d01259be021a8f656227b6d7a774a9f2",
+    "firmware/UnoMiniEthernet/HttpRequest.h": "7469f3fd7ca9053808a59e1cd9e6dfda2c76707ba5b60b4b831a33a45c507801",
+    "firmware/UnoMiniEthernet/AirSocket.h": "367110f7e3a135c49c2dce5de2dffd26bb68e0df2e375ead2c6566b33a8ed644",
+    "firmware/UnoMiniEthernet/I2cRecovery.h": "9099d533e1ee3b86581017255516707827a01978ea6da11fe1fbe989ba342f27",
+    "firmware/UnoMiniEthernet/MhZ14Pwm.h": "da432b544f6ca37bc9d6eeb38e784bb24cf3f71d1e61aa5fdc4b229c5e48c07c",
+    "firmware/UnoMiniEthernet/ViewJournal.h": "4d89c28f57c87e58a91696b7e3a4ebdbfcfcc8a489ef031c011655a5f4945c28",
+    "libraries/MiniBMP180/library.properties": "a6ea22b68201cda20c919e8804ce1b5ed06789a9231d7e6b8f08367677ec2ae6",
+    "libraries/MiniBMP180/src/MiniBMP180.h": "e49a1ee0dfadb668e5292f257e29855fd3e882a13b9b2898f8df693c3d109f6a",
+    "libraries/MiniBMP180/src/MiniDSL.h": "a258101a94384e6866f68a1117b04928ad5e0c3f1e089e535570b67e3420f3a4",
+    "libraries/MiniBMP180/src/MiniSHT.h": "9ced48b6b0cd70091a9fe7023f38df83f2fd4d634a001fd7ef8f65414e601701",
+    "libraries/MiniW5500/library.properties": "bac9c67b3d578cc6995456596bfefabb9af4889b4cdac52849b3447bc776b426",
+    "libraries/MiniW5500/README.md": "8b3b7779b6ac094cdfa5c8870558ac1b918713c862eb6fab0e4d8bddc78f42a1",
+    "libraries/MiniW5500/src/MiniW5500.cpp": "7193ef591e3a23c68277635db0addf5cfb11469e437d09a2527594a523275086",
+    "libraries/MiniW5500/src/MiniW5500.h": "ab808fe737aafb35920cbcbfa16eb41fd0956e4e940aba4ec12fbcc265798525",
+    "libraries/Wire/keywords.txt": "aabe8429ccc5d879c5a3bb48a8ac59a2a3f358ffe05599e9a5320fa34fafe289",
+    "libraries/Wire/library.properties": "175b7bec13aa47a986d8dfe60169dfd18d077b5631c3423d0313e1b5762de239",
+    "libraries/Wire/README.uno-mini.md": "e916b1a78711004dca2036750f658f9e48ab1a178a21c52721320b28a3be11ec",
+    "libraries/Wire/src/Wire.cpp": "e56c6ff92128cc1334b8e112fc463396646166e2dc8f99178b45d5201bb607c3",
+    "libraries/Wire/src/Wire.h": "3d2f89483dc04a1905e34943bc4d0086bad35b11883bc8f2b21cceaacb2eb72c",
+    "libraries/Wire/src/utility/twi.c": "846c0a685d1796990c8c5d06df4364fcf8d4657c2221161a613f8cafb232301d",
+    "libraries/Wire/src/utility/twi.h": "70a860feab5b3d1b57602adb6a8db832b6a8626201de68139df7abade6b003bb"
+  }
+}

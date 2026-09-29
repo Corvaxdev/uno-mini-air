@@ -1,0 +1,59 @@
+[
+  {
+    "case": "normal_72h",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      49,
+      110
+    ],
+    "predator_range": [
+      4,
+      9
+    ],
+    "plants_range": [
+      1000,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 77.67
+  },
+  {
+    "case": "room_72h",
+    "runs": 20,
+    "both_survived": 19,
+    "herb_range": [
+      63,
+      128
+    ],
+    "predator_range": [
+      0,
+      8
+    ],
+    "plants_range": [
+      983,
+      998
+    ],
+    "capacity_blocks": 0,
+    "seconds": 89.95
+  },
+  {
+    "case": "cycles_72h",
+    "runs": 20,
+    "both_survived": 20,
+    "herb_range": [
+      50,
+      118
+    ],
+    "predator_range": [
+      2,
+      8
+    ],
+    "plants_range": [
+      999,
+      1000
+    ],
+    "capacity_blocks": 0,
+    "seconds": 60.55
+  }
+]

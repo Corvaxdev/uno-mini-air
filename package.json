@@ -1,0 +1,6 @@
+{
+  "name": "uno-mini-air-build",
+  "private": true,
+  "description": "Offline JavaScript optimization; no browser runtime dependency",
+  "devDependencies": { "terser": "5.44.0" }
+}

@@ -5,8 +5,8 @@ A real HTTP server, live room instruments, and a shared ecosystem on an
 reads the sensors and serves the website from its own Flash. The browser
 draws the interface; W5500 handles Ethernet and TCP.
 
-[Live project](http://corvax.uk:8080/) В· [Room Terra](http://corvax.uk:8080/terra) В·
-[Model](docs/TERRA.md) В· [Air response](docs/TERRA-AIR.md) В· [Build](#build)
+[Live project](http://corvax.uk:8080/) · [Room Terra](http://corvax.uk:8080/terra) ·
+[Day / night](docs/DAY-NIGHT.md) · [Model](docs/TERRA.md) В· [Air response](docs/TERRA-AIR.md) В· [Build](#build)
 
 ```mermaid
 flowchart LR
@@ -17,16 +17,20 @@ flowchart LR
   W <-->|HTTP| B[Browser\nCanvas / charts / controls]
 ```
 
+![UNO Mini assembly](media/assembly-03.jpg)
+
+[Assembly photographs](docs/ILLUSTRATIONS.md) · [Engineering diagrams](docs/ILLUSTRATIONS.md#engineering-diagrams) · [Internet load results](evidence/LOAD.md)
+
 ## What fits
 
 - Temperature, humidity, pressure, light and CO2; bounded acquisition and
   explicit missing-data handling.
 - A 32 x 32 ecosystem: plants, herbivores, predators, pond, shelters and a
-  shared visitor action reserve. Room light controls night. Temperature,
+  shared visitor action reserve. Room light controls a gradual terrain tint and debounced night. Temperature,
   humidity and CO2/pressure influence the model.
 - Four cooperative HTTP peers sharing **one 512-byte workspace**. Compressed
   HTML/CSS/JS streams from `PROGMEM`; the MCU does not decompress the page.
-- **583 bytes** of world state: two bits per plant cell and packed animals.
+- **584 bytes** of world state: two bits per plant cell and packed animals.
   A complete browser snapshot is **480 bytes**.
 - Integer sensor/model arithmetic; no application heap or Serial logging.
 - I2C recovery, W5500 recovery and an 8-second watchdog.
@@ -37,15 +41,17 @@ flowchart LR
 
 | Build | Application Flash / 32,256 B | Static SRAM / 2,048 B | Embedded gzip |
 |---|---:|---:|---:|
-| Deployed 0.12.6-terra reference | 32,256 B | 1,491 B | 11,644 B |
-| Public source edition | 31,858 B | 1,491 B | 11,245 B |
+| Deployed 0.12.9-terra reference | 32,250 B | 1,492 B | 11,385 B |
+| Public source edition | 31,836 B | 1,492 B | 10,971 B |
 
-The remaining 557 bytes after reference globals must also accommodate the
+The remaining 556 bytes after reference globals must also accommodate the
 stack and interrupts. It is not all available for new arrays. A prior
 instrumented 128-animal run observed a 413-byte minimum stack gap; this is
 a measurement, not a worst-case proof. See [evidence and limits](evidence/README.md).
 
 Build hashes: [public-build.json](evidence/public-build.json).
+
+Production has 6 B of application Flash headroom; this public build has 420 B.
 
 The public edition has example networking, no analytics or search-ownership
 tags, and an origin-relative canonical URL. It is **not byte-identical** to
@@ -75,7 +81,7 @@ Installed drivers:
   Configure the module address separately; runtime code does not rewrite it.
 - Trema light I2C module at **0x09**.
 - BMP085/BMP180 at **0x77**, chip ID 0x55.
-- MH-Z14A **400вЂ“5000 ppm**, PWM; allow its warm-up and specified power supply.
+- MH-Z14A **400–5000 ppm**, PWM; allow its warm-up and specified power supply.
 
 Use regulated power and modules compatible with the UNO's 5 V signals. The
 W5500 chip itself uses 3.3 V; a module's marked 5 V input must include the
@@ -90,7 +96,7 @@ Pinned tools: Arduino CLI **1.5.1**, Arduino AVR Boards **1.8.8**, Python
 checksums and compiler flags: [toolchain-lock.json](toolchain-lock.json).
 
 ```sh
-git clone https://github.com/nanomicron/uno-mini-air.git
+git clone https://github.com/Corvaxdev/uno-mini-air.git
 cd uno-mini-air
 python -m pip install -r requirements-build.txt
 npm ci
@@ -142,24 +148,23 @@ python tests/run.py --output build-host-tests
 
 This executes the actual model and HTTP parser under AddressSanitizer and
 UndefinedBehaviorSanitizer: model invariants, night hysteresis, sensor
-fallbacks, action validation, snapshot bounds, arithmetic extremes, neutral
-regression, routes and all 4,096 action encodings. The HTTP response test
+fallbacks, action validation, snapshot bounds, arithmetic extremes, light-dose arithmetic, routes and all 4,096 action encodings. The HTTP response test
 extracts the header function from the current sketch. Tests are local and
 never send traffic to the live project.
 
 The host runner also supports repeatable population experiments; for example:
 
 ```sh
-build-host-tests/terra batch 20 8640 230 500 353 600 101325 0
+build-host-tests/terra batch 20 25920 230 500 320 600 101325 4 201
 ```
 
-That is 20 seeds for 24 simulated hours, at 23.0 C, 50.0% RH, 353 lx,
+That is 20 seeds for 72 simulated hours, at 23.0 C, 50.0% RH, 320 lx with a 16 h / 8 h light/dark cycle,
 600 ppm and 101325 Pa. Recorded runs and their limitations are in `evidence/`.
 
 ## HTTP and boundaries
 
-`/` live instruments В· `/terra` ecosystem В· `/lab` measurements В· `/devlog`
-milestones В· `/api` sensor JSON В· `/life` binary world state.
+`/` live instruments · `/terra` ecosystem · `/lab` measurements · `/devlog`
+milestones · `/api` sensor JSON · `/life` binary world state.
 
 `PUT /life/XYZ` queues a hexadecimal action: low 10 bits select the cell,
 next two bits select planting / herbivore / predator. `202` means queued,
@@ -176,7 +181,7 @@ load evidence includes an unresolved loss of connectivity under an earlier
 ## License
 
 Original project code is **[MIT](LICENSE)**: use, modify, distribute and sell
-it, retaining the license/copyright notice. Copyright belongs to **nanomicron**.
+it, retaining the license/copyright notice. Copyright belongs to **Corvaxdev**.
 Vendored Arduino-derived drivers retain their upstream LGPL/GPL license
 choices; see [THIRD_PARTY.md](THIRD_PARTY.md). Arduino names and marks belong
 to their respective owners; this is an independent project.

@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "seed_range": [
+    201,
+    220
+  ],
+  "scenarios": [
+    {
+      "case": "normal_cycle",
+      "runs": 20,
+      "hours_per_run": 72,
+      "both_survived": 19,
+      "all_extinct": 0,
+      "herbs": [
+        31,
+        128
+      ],
+      "predators": [
+        0,
+        9
+      ],
+      "seconds": 52.52
+    },
+    {
+      "case": "room_cycle",
+      "runs": 20,
+      "hours_per_run": 72,
+      "both_survived": 19,
+      "all_extinct": 0,
+      "herbs": [
+        68,
+        128
+      ],
+      "predators": [
+        0,
+        9
+      ],
+      "seconds": 63.09
+    },
+    {
+      "case": "dim_cycle",
+      "runs": 10,
+      "hours_per_run": 72,
+      "both_survived": 10,
+      "all_extinct": 0,
+      "herbs": [
+        60,
+        96
+      ],
+      "predators": [
+        5,
+        9
+      ],
+      "seconds": 29.09
+    },
+    {
+      "case": "continuous_day",
+      "runs": 10,
+      "hours_per_run": 168,
+      "both_survived": 0,
+      "all_extinct": 10,
+      "herbs": [
+        0,
+        0
+      ],
+      "predators": [
+        0,
+        0
+      ],
+      "seconds": 30.83
+    },
+    {
+      "case": "continuous_night",
+      "runs": 10,
+      "hours_per_run": 168,
+      "both_survived": 0,
+      "all_extinct": 6,
+      "herbs": [
+        0,
+        3
+      ],
+      "predators": [
+        0,
+        0
+      ],
+      "seconds": 1.92
+    },
+    {
+      "case": "excess_light",
+      "runs": 10,
+      "hours_per_run": 72,
+      "both_survived": 0,
+      "all_extinct": 10,
+      "herbs": [
+        0,
+        0
+      ],
+      "predators": [
+        0,
+        0
+      ],
+      "seconds": 5.78
+    }
+  ]
+}

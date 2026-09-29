@@ -1,4 +1,4 @@
-# Room Terra РІР‚вЂќ 0.12.3
+# Room Terra — 0.12.9
 
 The UNO Mini owns the entire shared ecosystem. It advances without browsers,
 the Internet, a Raspberry Pi or an application server. W5500 transports HTTP;
@@ -6,9 +6,7 @@ the browser only renders snapshots and submits bounded actions.
 
 System light/dark theme follows live OS changes, with no manual preference.
 The shared reserve is a 36px number in the left column (above the map on phones).
-The deployed 0.12.6 reference uses 32,256 B Flash and 1,491 B static SRAM.
-The public build removes deployment analytics and uses example networking;
-see README for its independently measured resource use.
+Deployed build (public edition measured separately in README): 32,250 / 32,256 B Flash, 1,492 B static SRAM, 11,385 B shared gzip.
 
 ## Memory and scheduling
 
@@ -16,7 +14,7 @@ see README for its independently measured resource use.
 - Plants: 256 B, two bits per cell (biomass 0..3).
 - Animals: 256 B, 128 fixed 16-bit records. Position: 10 bits; energy: 3;
   species: 1; acted-this-step: 1. Empty records are zero. No allocation.
-- Complete AVR world state: 583 B, including environment, timing and counters.
+- Complete AVR world state: 584 B, including environment, timing and counters.
 - Snapshot: 480 B. Animals use 11 wire bits each (position + species);
   energies remain private MCU state. Counts determine the occupied wire records.
 - The original HTTP workspace remains 512 B. The header and 480 B world body
@@ -33,12 +31,13 @@ All calculations on AVR are integers. Probabilities use a 16-bit threshold
 against the upper 16 bits of a xorshift32 result. Quantization makes these
 equations approximate; `firmware/UnoMiniEthernet/Terra.h` is authoritative.
 
-Let L = clamp((lux - 10)/490, 0, 1), Mtarget = clamp((RH - 20)/50, 0, 1).
+Let L = clamp((lux - 10)/310, 0, 1), Mtarget = clamp((RH - 20)/50, 0, 1).
 Virtual soil approaches Mtarget with `M += (Mtarget-M)/180` per active step
 (approximately a 30-minute time constant). Soil has eight fractional bits,
 avoiding the large dead band of a whole-percent accumulator.
 
 Effective light is saturated: photo=floor(383*L8/(L8+128)), L8=rounddown(255*L).
+A one-byte light debt suppresses photosynthesis above128, with a factor(255-debt)/128. Every640s, daylight adds1..8 units based on raw lux; darkness removes3. Normal16h/8h cycles clear the debt; long/extreme illumination can exhaust food.
 Temperature modifies plant growth by clamp(1 - |T-23|/25, 0, 1), and animal
 metabolism by clamp(1 + (T-23)/40, 0.5, 1.5). Horizontal light/moisture gradients
 and the wetter shore create local variation.
@@ -75,16 +74,16 @@ in both attack and danger evaluation. Refuges supply no free food.
 A central 24-cell pond is computed from coordinates: no terrain bitmap in RAM.
 Water excludes plants and animals. Nearby land receives up to 64/255 extra
 virtual moisture, clamped at one; the pond is a fixed reservoir, not a water
-level simulation. The browser renders the identical geometry.
+level simulation. The browser renders the identical geometry. Shelters have bright outlines; selecting one disables predator placement and shows SHELTER. Firmware independently rejects predator placement there.
 
 Darkness is measured by the room light sensor, not wall-clock time. Eighteen
 successive 10-second readings below the quantized night threshold (<=25 lx)
-pause biology. Eighteen above the wake threshold (>=41 lx) resume it. The gap
+slow ecological passes to1/32 rate. Eighteen above the wake threshold (>=41 lx) restore full activity. The gap
 provides hysteresis. Sensors, HTTP, credit refill and visitor actions continue
-during dormancy. There is no invented countdown to sunset.
+during night rest. There is no invented countdown to sunset.
 
 Missing inputs retain their previous value for five minutes, then approach
-marked fallback values (23 C, 50% RH, 353 lx). This affects only simulation
+marked fallback values (23 C, 50% RH, 227 lx). This affects only simulation
 inputs; the sensor API still reports missing measurements as null.
 
 ## Shared actions
@@ -108,57 +107,19 @@ have no per-person identity or fairness guarantee.
 
 ## Validation and limits
 
-Current0.12.3 formulas, CO2/pressure response, all final/held-out tests and MCU
-measurements: [TERRA-AIR.md](TERRA-AIR.md), [hardware probe](../evidence/hardware-probe.json).
-The following measurements are the historical0.12.0 baseline.
+Current build sizes and example network configuration are in the repository README.
+See [evidence](../evidence/README.md) for versioned measurements and failures.
+The current host suite tests the model, arithmetic, all 2,048 species/cell
+placements, HTTP routes and all 4,096 encoded actions under ASAN/UBSAN.
+World state is not persisted; a reset starts it again.
 
+The 0.12.9 light model completed 50 runs of 72 simulated hours under three room
+cycles: 48 ended with both species, two lost predators, none lost both species.
+Continuous daylight, darkness and excessive illumination can exhaust the food chain.
+These are deterministic simulation experiments, not biological calibration.
 
-Current reproducible model tests: `tests/terra.cpp` and `tests/air.cpp`.
-
-- The supplied desktop reference reproduced `normal_24h.csv` exactly.
-- Final model: 20 seeds x 8,640 steps at 23 C, 50% RH, 353 lx: both species
-  survived 20/20. Final herbivores 57..117; predators 3..10. No capacity blocks.
-- Stress: 5 x 8,640 steps at 30 C, 27.5% RH, 84 lx: both species extinct 5/5.
-- Bounds/invariants, pond, shelters, night hysteresis, fallback, failed-action
-  charging, cooldown, refill, snapshot guards, reader independence and millis
-  rollover passed. Address/undefined-behaviour sanitizers passed host tests.
-- HTTP: seven GET routes and all 4,096 three-digit command encodings checked.
-- Browser: 320, 390, 768, 1100 and 1440 px; routes and keyboard queueing;
-  headless browser explicitly closed. The local preview identifies host
-  computation and simulated room inputs.
-
-Physical profiling used a separate diagnostic build with 128 animal slots
-occupied and ten extra diagnostic SRAM bytes. Over 65 seconds from one VPS:
-65/65 API+world pairs succeeded (130 HTTP replies); pair median 138 ms,
-p95 197 ms. Max observed work slice 4,344 us; max accumulated world work per
-step 488,480 us (~4.9% of its ten-second interval). Sensor/network work is
-additional; these are observed timings, not worst-case bounds.
-
-Canary profiling observed at least 412 B between static data and deepest
-observed stack use. This is not proof for every interrupt/fault path. Diagnostic
-instrumentation was removed; the production build contains no serial logging.
-
-After deployment, an external observer verified all public page hashes, the
-retired /guide route, working sensors and advancing world steps. At 8 lx the
-real world entered dormancy: plant/animal snapshot bytes stayed identical
-over an eleven-second interval while generations and sensor readings remained
-available. Public dark-theme browser checks passed at 320/390/768/1440 px,
-including /terra, /lab, /devlog and the live display.
-
-This is not a new many-user capacity benchmark. The previous direct HTTP
-10-client repeat lost connectivity and required a manual reset; its cause
-remains unconfirmed. Raw historical failures remain in
-`verification/direct-http-20260928`. No stability claim is inferred from the
-short profiling run.
-
-## Differences from the supplied reference
-
-Sparse 128-animal capacity; integer arithmetic; cooperative updates; random
-slot order instead of a full animal-cell permutation; real night debounce;
-food/density feedback; plant growth coefficient 1/32 instead of 1/16;
-refuge-aware danger; pond/shore; bounded actions and input fallback. These
-changes mean the final simulation is not bit-identical to the desktop model.
-
-`/terra` replaces Shared World and the public model section. Legacy #world and
-#stories links open Terra; `/guide` is retired. Devlog contains no ESP32/model
-entry. Historical source/releases and backups remain available for recovery.
+Historical 0.12.3 instrumented hardware observed a 4.324 ms maximum work slice
+and a 413 B minimum stack gap. The 180/180 external replies in 90 seconds were a
+functional probe, not a capacity measurement. The earlier direct HTTP load test
+includes a loss of connectivity requiring a manual reset; its cause is unresolved.
+Current Terra capacity has not been established by those older tests.

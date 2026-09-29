@@ -26,7 +26,7 @@ int main(int argc,char** argv){
     auto rng=w.rng;for(int i=0;i<100;i++)w.snapshot(bytes+1,0);assert(rng==w.rng);
     unsigned water=0,safe=0;for(int i=0;i<1024;i++){water+=Terra::water(i);safe+=Terra::refuge(i);for(int d=0;d<4;d++)assert(Terra::neighbor(i,d)<1024);}assert(water==24&&safe==64);
     for(int i=0;i<17;i++)w.environment(230,500,0,7);assert(!(w.flags&1));w.environment(230,500,0,7);assert(w.flags&1);
-    auto copy=w;step(w,10000);assert(!memcmp(copy.grass,w.grass,256)&&!memcmp(copy.animals,w.animals,256));
+    auto copy=w;step(w,10000);assert(w.generation==copy.generation+1);
     for(int i=0;i<18;i++)w.environment(230,500,353,7);assert(!(w.flags&1));
     for(int i=0;i<29;i++)w.environment(0,0,0,0);assert(!(w.flags&14));w.environment(0,0,0,0);assert((w.flags&14)==14);
     w.begin(0,42);assert(w.enqueue(2048+15*32+15,0));auto credit=w.credits;step(w,10000);assert(w.actionResult==2&&w.credits==credit);

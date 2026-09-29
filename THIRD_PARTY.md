@@ -1,7 +1,7 @@
 # Third-party notices
 
 The root MIT license applies to original AIR / 328 source, web UI, bitmap
-patterns, tooling, tests and documentation by nanomicron. It does not replace
+patterns, tooling, tests and documentation by Corvaxdev. It does not replace
 the following upstream licenses or their copyright notices.
 
 | Component | License | Origin / local changes |

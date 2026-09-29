@@ -19,6 +19,7 @@ struct Terra {
   uint16_t events[7], metabolismRate; // births H/P, starvation H/P, kills, growth, actions
   int16_t temperature10;
   uint8_t herbs, predators, credits, phase, nightCount, stale[3], light;
+  uint8_t lightDebt; // cumulative photoperiod/excess-light stress; recovers in darkness
   uint8_t flags, actionResult, growthBase, airLevel; // filtered CO2 partial-pressure equivalent, 25 ppm units
   // phase: 0 idle, 1 plant pass, 2 animal pass. flags bit0: dormant.
   uint32_t random() { rng^=rng<<13; rng^=rng>>17; rng^=rng<<5; return rng; }
@@ -54,7 +55,7 @@ struct Terra {
   }
   TERRA_FN void begin(uint32_t now,uint32_t seed=0x6d2b79f5UL) {
     memset(this,0,sizeof(*this));rng=seed?seed:1;at=creditAt=now;acceptedAt=now-60000UL;
-    pending=NONE;credits=12;soil=153*256;temperature10=230;humidity10=500;lux=353;light=179;flags=14;growthBase=178;metabolismRate=8192;airLevel=24;
+    pending=NONE;credits=12;soil=153*256;temperature10=230;humidity10=500;lux=227;light=178;flags=14;growthBase=178;metabolismRate=8192;airLevel=24;
     while(plants<384){uint16_t p=random()&1023;if(!water(p)&&!plant(p))setPlant(p,2);}
     while(herbs<60){uint16_t p=random()&1023;if(!water(p)&&find(p)<0)insert(p,false,5,false);}
     while(predators<8){uint16_t p=random()&1023;if(!water(p)&&!refuge(p)&&find(p)<0)insert(p,true,5,false);}
@@ -70,8 +71,8 @@ struct Terra {
     flags&=1;
     if(valid&1)temperature10=t;else if(stale[0]>=30){temperature10=approach(temperature10,230);flags|=2;}
     if(valid&2)humidity10=rh;else if(stale[1]>=30){humidity10=approach(humidity10,500);flags|=4;}
-    if(valid&4)lux=lx;else if(stale[2]>=30){int32_t delta=353L-int32_t(lux);lux+=delta/8?delta/8:delta>0?1:delta<0?-1:0;flags|=8;}
-    light=lux<=10?0:lux>=500?255:uint32_t(lux-10)*255/490;
+    if(valid&4)lux=lx;else if(stale[2]>=30){int32_t delta=227L-int32_t(lux);lux+=delta/8?delta/8:delta>0?1:delta<0?-1:0;flags|=8;}
+    light=lux<=10?0:lux>=320?255:uint32_t(lux-10)*255/310;
     int16_t delta=temperature10-230;if(delta<0)delta=-delta;
     uint16_t tf=delta>=250?0:255-uint16_t(delta)*51/50;
     growthBase=uint16_t(383-(49151U+light)/(light+128))*tf>>8;
@@ -89,8 +90,17 @@ struct Terra {
     uint8_t load=airLevel<=32?0:64-4096U/(airLevel+32);
     metabolismRate+=(uint16_t(metabolismRate>>4)*load)>>4;
     if(valid!=7)flags|=128;
-    bool switching=(flags&1)?light>15:light<8;
+    // Room calibration: full day at320lx; sleep<=25lx, wake>=41lx.
+    bool switching=(flags&1)?light>24:light<13;
     if(switching){if(++nightCount==18){flags^=1;nightCount=0;}}else nightCount=0;
+    // One dose update per64 world boundaries (10m40s), no extra timer.
+    // Normal16h light/8h dark clears the debt. Extra irradiance accelerates it.
+    if(!(generation&63)){
+      if(flags&1)lightDebt=lightDebt>3?lightDebt-3:0;
+      else {uint8_t dose=lux<640?1:lux>=2560?8:lux/320;
+        uint16_t sum=uint16_t(lightDebt)+dose;lightDebt=sum>255?255:sum;}
+    }
+    if(lightDebt>128)growthBase=uint16_t(growthBase)*(255-lightDebt)>>7;
     if(!(flags&1)){
       uint16_t target=humidity10<=200?0:humidity10>=700?65280:uint32_t(humidity10-200)*65280/500;
       soil+=int32_t(int32_t(target)-soil)/180;
@@ -175,7 +185,7 @@ struct Terra {
   TERRA_FN void tick(uint32_t now) {
     if(now-creditAt>=600000UL){uint32_t n=(now-creditAt)/600000UL;credits=n>=uint8_t(12-credits)?12:credits+n;creditAt+=n*600000UL;}
     if(!phase){if(!due(now))return;at=now;apply(now);
-      if(flags&1){++generation;return;}
+      if((flags&1)&&(generation&31)){++generation;return;} // Night work at1/32 rate, never frozen.
       cursor=random()&1023;stride=(random()&1023)|1;progress=0;phase=1;
     }
     if(phase==1){plantStep(cursor);if(++progress==1024){for(uint8_t k=0;k<CAP;k++)animals[k]&=~16384;cursor=random()&127;stride=(random()&127)|1;progress=0;phase=2;return;}}

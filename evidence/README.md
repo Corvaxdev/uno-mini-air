@@ -1,18 +1,20 @@
 # Measurement scope
 
-These are historical results from the deployed 0.12.3 Terra model. The same
-Terra source is used by 0.12.6 and the public source edition.
+- `public-build.json`: independently compiled public 0.12.9 source, example
+  network and no deployment analytics. It is not the deployed binary.
+- `source-parity.json`: normalized source hashes matching the deployed runtime;
+  network constants are intentionally substituted. Assets are separately rebuilt.
+- `host-tests.json`: current ASAN/UBSAN suite, including light dose and shelters.
+- `model-0129/`: accepted current model, seeds 201..220 (201..210 for 10-run
+  cases), no visitor actions. Three ordinary 72-hour room cycles: 48/50 coexist,
+  two predator extinctions, no full collapse. Extreme runs can collapse.
+- `model-24h/`, `model-72h/`: historical **0.12.3**, prior light model. They do
+  not describe current 0.12.9 behaviour. Kept so older results remain traceable.
+- `hardware-probe.json`: historical **0.12.3**, 128 occupied animal slots,
+  instrumentation added 12 B of static SRAM. Max slice 4.324 ms, minimum observed
+  stack gap 413 B, 180/180 responses in 90 seconds. Not a worst-case bound.
+- [LOAD.md](LOAD.md): **0.11.15-hidden**, two external VPS, historical load
+  results including failed requests and the manual-reset incident.
 
-- `model-24h/`: 13 scenarios x 20 seeds; 240 ordinary runs retain both species,
-  all 20 hot/dry/dim runs collapse.
-- `model-72h/`: held-out seeds 21..40, 3 scenarios; 59/60 retain both species,
-  one constant-room run loses predators. These are simulations, not measured
-  biological outcomes or universal survival guarantees.
-- `hardware-probe.json`: diagnostic firmware, 128 occupied animal slots,
-  90 sensor/world request pairs from one external VPS (180 responses).
-  Static SRAM was 1503 B because instrumentation added 12 B. The 413 B gap is
-  observed in that workload, not a worst-case stack proof or current capacity.
-
-An earlier pre-Terra direct HTTP 10-client repeat lost connectivity and needed
-a manual reset. Cause remains unconfirmed. No claim of stable 10-client
-capacity is made. This publication does not run load against the live board.
+Current build headroom is not measured peak free RAM. Current smoke tests and
+model experiments do not establish multi-client Internet reliability.

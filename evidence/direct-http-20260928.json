@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-28",
+  "firmware": "0.11.15-hidden",
+  "scope": "Historical direct public HTTP; before Room Terra. Two external VPS, synthetic HTTP clients, half sensor and half Life viewers. Not current user capacity.",
+  "page_deadline_s": 5,
+  "data_deadline_s": 3.5,
+  "initial_ramp_s": 5,
+  "rows": [
+    {
+      "profile": "2 mixed",
+      "seconds": 90,
+      "valid": 108,
+      "attempted": 108,
+      "percent": 100.0
+    },
+    {
+      "profile": "10 mixed",
+      "seconds": 60,
+      "valid": 317,
+      "attempted": 321,
+      "percent": 98.75
+    },
+    {
+      "profile": "20 mixed",
+      "seconds": 60,
+      "valid": 416,
+      "attempted": 459,
+      "percent": 90.63
+    },
+    {
+      "profile": "40 mixed",
+      "seconds": 60,
+      "valid": 546,
+      "attempted": 708,
+      "percent": 77.12
+    },
+    {
+      "profile": "10 mixed repeat",
+      "seconds": 120,
+      "valid": 475,
+      "attempted": 527,
+      "percent": 90.13
+    },
+    {
+      "profile": "2 mixed after reset",
+      "seconds": 600,
+      "valid": 729,
+      "attempted": 734,
+      "percent": 99.32
+    }
+  ],
+  "incident": {
+    "run": "10 mixed repeat",
+    "lost_connectivity_near_s": 97,
+    "failed_recovery_probes": 14,
+    "manual_reset_restored_service": true,
+    "root_cause": "unconfirmed"
+  },
+  "latency_scope": "successful validated responses only; failures stay in denominator"
+}

@@ -23,3 +23,6 @@ states. [Full screenshots and thresholds](DAY-NIGHT.md).
 
 SVG sources accompany the PNG files. Text and arithmetic are explicit,
 programmatically checked and visually reviewed; not generated inside a raster image.
+
+
+Placement fix 0.12.10: see [checks](../evidence/placement-01210.json). Diagrams, day/night images and model/load measurements remain versioned 0.12.9 or earlier; their labels identify the measured revision. Current build sizes are in the root README and evidence/public-build.json.

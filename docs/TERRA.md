@@ -123,3 +123,8 @@ and a 413 B minimum stack gap. The 180/180 external replies in 90 seconds were a
 functional probe, not a capacity measurement. The earlier direct HTTP load test
 includes a loss of connectivity requiring a manual reset; its cause is unresolved.
 Current Terra capacity has not been established by those older tests.
+
+
+## Placement / 0.12.10
+
+Select a dry cell for every visitor action. A water-centred seed command is rejected, even if its 3x3 footprint reaches land. A land-centred footprint skips water. Animals cannot enter water; predators cannot enter shelters. Rejection costs no reserve or cooldown. HTTP 202 acknowledges the queue; the next snapshot reports the result.

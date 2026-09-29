@@ -117,13 +117,13 @@ struct Terra {
   TERRA_FN void apply(uint32_t now) {
     if(pending==NONE)return;
     uint8_t kind=pending>>10,cost=kind==0?1:kind==1?3:8;uint16_t p=pending&1023;pending=NONE;
-    actionResult=2;if(credits<cost)return;
+    actionResult=2;if(water(p)||credits<cost)return;
     if(kind==0){bool changed=false;
       for(int8_t y=-1;y<=1;y++)for(int8_t x=-1;x<=1;x++){
         uint16_t q=(((p>>5)+y+32)&31)*32+(((p&31)+x+32)&31);
         if(!water(q)&&!plant(q)){setPlant(q,1);changed=true;}
       }if(!changed){actionResult=4;return;}
-    }else{if(water(p)||find(p)>=0||(kind==2&&refuge(p)))return;if(!insert(p,kind==2,3)){actionResult=3;return;}}
+    }else{if(find(p)>=0||(kind==2&&refuge(p)))return;if(!insert(p,kind==2,3)){actionResult=3;return;}}
     credits-=cost;acceptedAt=now;actionResult=1;++events[6];
   }
   TERRA_FN void plantStep(uint16_t p) {

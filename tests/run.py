@@ -33,6 +33,7 @@ def main():
         ('air', ROOT/'tests/air.cpp', []),
         ('light', ROOT/'tests/light.cpp', []),
         ('shelters', ROOT/'tests/shelters.cpp', []),
+        ('placement', ROOT/'tests/placement.cpp', []),
         ('http', ROOT/'tests/http.cpp', []),
         ('header', out/'header.cpp', [])]:
         exe = out/name

@@ -11,6 +11,9 @@
   "shelters": [
     "PASS 2048 direct MCU action cases;64 refuge cells reject predators, allow herbivores; rejected actions cost0"
   ],
+  "placement": [
+    "PASS 6144 placement cases; all 1024 cells, three actions, normal/empty reserve; 24 water cells; shoreline clipping; toroidal edges; no cost/cooldown on rejection"
+  ],
   "http": [
     "PASS seven GET routes, 4096 action codes, retired Guide route"
   ],

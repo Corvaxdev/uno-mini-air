@@ -1,10 +1,10 @@
 # Measurement scope
 
-- `public-build.json`: independently compiled public 0.12.9 source, example
+- `public-build.json`: independently compiled public 0.12.10 source, example
   network and no deployment analytics. It is not the deployed binary.
 - `source-parity.json`: normalized source hashes matching the deployed runtime;
   network constants are intentionally substituted. Assets are separately rebuilt.
-- `host-tests.json`: current ASAN/UBSAN suite, including light dose and shelters.
+- `host-tests.json`: current ASAN/UBSAN suite, including light dose, shelters and water placement.
 - `model-0129/`: accepted current model, seeds 201..220 (201..210 for 10-run
   cases), no visitor actions. Three ordinary 72-hour room cycles: 48/50 coexist,
   two predator extinctions, no full collapse. Extreme runs can collapse.
@@ -18,3 +18,6 @@
 
 Current build headroom is not measured peak free RAM. Current smoke tests and
 model experiments do not establish multi-client Internet reliability.
+
+
+Placement fix 0.12.10: see [checks](placement-01210.json). Diagrams, day/night images and model/load measurements remain versioned 0.12.9 or earlier; their labels identify the measured revision. Current build sizes are in the root README and evidence/public-build.json.

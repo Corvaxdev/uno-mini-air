@@ -1,5 +1,12 @@
 # Changes
 
+## 0.12.10-terra
+
+- All visitor actions require a dry selected cell; water-centred seeding no longer affects nearby land.
+- Water selection disables all action buttons and displays WATER; costs restore on land.
+- MCU rejects water commands without spending reserve or starting cooldown.
+- 6,144 placement cases cover every cell, action and normal/empty reserve.
+
 ## 0.12.9-terra
 
 - Room daylight normalized to 320 lx; sensor-driven terrain tint with bright

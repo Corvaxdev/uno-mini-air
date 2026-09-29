@@ -6,7 +6,7 @@ reads the sensors and serves the website from its own Flash. The browser
 draws the interface; W5500 handles Ethernet and TCP.
 
 [Live project](http://corvax.uk:8080/) · [Room Terra](http://corvax.uk:8080/terra) ·
-[Day / night](docs/DAY-NIGHT.md) · [Model](docs/TERRA.md) В· [Air response](docs/TERRA-AIR.md) В· [Build](#build)
+[Day / night](docs/DAY-NIGHT.md) · [Model](docs/TERRA.md) · [Air response](docs/TERRA-AIR.md) · [Build](#build)
 
 ```mermaid
 flowchart LR
@@ -41,8 +41,8 @@ flowchart LR
 
 | Build | Application Flash / 32,256 B | Static SRAM / 2,048 B | Embedded gzip |
 |---|---:|---:|---:|
-| Deployed 0.12.9-terra reference | 32,250 B | 1,492 B | 11,385 B |
-| Public source edition | 31,836 B | 1,492 B | 10,971 B |
+| Deployed 0.12.10-terra reference | 32,252 B | 1,492 B | 11,386 B |
+| Public source edition | 31,840 B | 1,492 B | 10,975 B |
 
 The remaining 556 bytes after reference globals must also accommodate the
 stack and interrupts. It is not all available for new arrays. A prior
@@ -51,7 +51,7 @@ a measurement, not a worst-case proof. See [evidence and limits](evidence/README
 
 Build hashes: [public-build.json](evidence/public-build.json).
 
-Production has 6 B of application Flash headroom; this public build has 420 B.
+Production has 4 B of application Flash headroom; this public build has 416 B.
 
 The public edition has example networking, no analytics or search-ownership
 tags, and an origin-relative canonical URL. It is **not byte-identical** to

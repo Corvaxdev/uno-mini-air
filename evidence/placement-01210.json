@@ -1,0 +1,41 @@
+{
+  "version": "0.12.10-terra",
+  "host_placement_cases": 6144,
+  "host_sanitizers": [
+    "ASAN",
+    "UBSAN"
+  ],
+  "browser_checks": 32,
+  "public_water_actions": [
+    {
+      "kind": 0,
+      "rejected": true,
+      "reserve_before": 12,
+      "reserve_after": 12,
+      "cooldown": 0,
+      "action_events_unchanged": true
+    },
+    {
+      "kind": 1,
+      "rejected": true,
+      "reserve_before": 12,
+      "reserve_after": 12,
+      "cooldown": 0,
+      "action_events_unchanged": true
+    },
+    {
+      "kind": 2,
+      "rejected": true,
+      "reserve_before": 12,
+      "reserve_after": 12,
+      "cooldown": 0,
+      "action_events_unchanged": true
+    }
+  ],
+  "production_flash": 32252,
+  "production_static_sram": 1492,
+  "production_gzip": 11386,
+  "workspace": 512,
+  "snapshot": 480,
+  "initial_public_check": "An 8 s page-body timeout triggered rollback. The previous release was verified over LAN and public HTTP. Retry with readiness check and 30 s read timeout passed. No throughput or reliability improvement is claimed."
+}

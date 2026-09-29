@@ -1,8 +1,8 @@
 {
-  "reference": "0.12.9-terra",
+  "reference": "0.12.10-terra",
   "comparison": "Runtime source matches the deployed release after CRLF-to-LF normalization. NetworkConfig.h and the sketch networking constants are intentionally different.",
   "sha256_lf": {
-    "firmware/UnoMiniEthernet/Terra.h": "180a58fba8f2aeb0e9f82888288999b492b921066217003edbdb4f2784662a39",
+    "firmware/UnoMiniEthernet/Terra.h": "b6a16526f321473e48d02002e3ec10c43a0e0d3d8e839894cfc1c4ec547577f5",
     "firmware/UnoMiniEthernet/HttpRequest.h": "62acd8c0a9859def59786f56b442dae088d0d12672c6786500832ad3bacbdc04",
     "firmware/UnoMiniEthernet/AirSocket.h": "367110f7e3a135c49c2dce5de2dffd26bb68e0df2e375ead2c6566b33a8ed644",
     "firmware/UnoMiniEthernet/I2cRecovery.h": "9099d533e1ee3b86581017255516707827a01978ea6da11fe1fbe989ba342f27",

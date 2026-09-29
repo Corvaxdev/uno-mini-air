@@ -35,23 +35,24 @@ flowchart LR
 - Integer sensor/model arithmetic; no application heap or Serial logging.
 - I2C recovery, W5500 recovery and an 8-second watchdog.
 - A view counter with a 128-record CRC EEPROM ring and 15-minute checkpoints.
+  Failed slots are skipped while the latest valid checkpoint is protected.
   It counts page loads, not unique people. Worlds restart after power loss.
 
 ### Resource measurements
 
 | Build | Application Flash / 32,256 B | Static SRAM / 2,048 B | Embedded gzip |
 |---|---:|---:|---:|
-| Deployed 0.12.10-terra reference | 32,252 B | 1,492 B | 11,386 B |
-| Public source edition | 31,840 B | 1,492 B | 10,975 B |
+| Deployed 0.12.11-terra reference | 32,238 B | 1,493 B | 11,347 B |
+| Public source edition | 31,822 B | 1,493 B | 10,930 B |
 
-The remaining 556 bytes after reference globals must also accommodate the
+The remaining 555 bytes after reference globals must also accommodate the
 stack and interrupts. It is not all available for new arrays. A prior
 instrumented 128-animal run observed a 413-byte minimum stack gap; this is
 a measurement, not a worst-case proof. See [evidence and limits](evidence/README.md).
 
 Build hashes: [public-build.json](evidence/public-build.json).
 
-Production has 4 B of application Flash headroom; this public build has 416 B.
+Production has 18 B of application Flash headroom; this public build has 434 B.
 
 The public edition has example networking, no analytics or search-ownership
 tags, and an origin-relative canonical URL. It is **not byte-identical** to

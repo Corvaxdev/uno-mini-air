@@ -21,3 +21,6 @@ model experiments do not establish multi-client Internet reliability.
 
 
 Placement fix 0.12.10: see [checks](placement-01210.json). Diagrams, day/night images and model/load measurements remain versioned 0.12.9 or earlier; their labels identify the measured revision. Current build sizes are in the root README and evidence/public-build.json.
+
+
+0.12.11: [reliability checks](reliability-01211.json) and [nine host test groups](host-tests-01211.json). Current build sizes are in the root README.

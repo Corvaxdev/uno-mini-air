@@ -1,5 +1,13 @@
 # Changes
 
+## 0.12.11-terra
+
+- LIVE stops polling while hidden and resumes a single loop on return.
+- Animal actions check occupied cells and full capacity; selection hints survive refresh.
+- World restart clears the displayed event log.
+- Failed EEPROM writes advance through the ring while preserving the latest verified checkpoint. Retries remain15 minutes apart.
+- Automatic system theme uses CSS media queries.
+
 ## 0.12.10-terra
 
 - All visitor actions require a dry selected cell; water-centred seeding no longer affects nearby land.

@@ -1,8 +1,6 @@
-<script>(()=>{let m=matchMedia('(prefers-color-scheme: dark)');function a(){document.documentElement.classList.toggle('dark',m.matches)}a();m.addEventListener('change',a)})()</script>
 <style>
 :root{--technical:#5c6659;--caption:#697064;--board:#707b6c;--hover:#d2d5ce;--frame-hover:#454b45}
-:root.dark{--ink:#d2d9ce;--muted:#a9b3a3;--screen:#202620;--paper:#121612;--frame:#30372e;--rule:#536052;--technical:#a9b3a3;--caption:#9aa592;--board:#9aa592;--hover:#303b2e;--frame-hover:#454f41;color-scheme:dark}
-.dark canvas{filter:invert(1)}.dark .report-link{color:#cbd1c5}
+@media(prefers-color-scheme:dark){:root:root{--ink:#d2d9ce;--muted:#a9b3a3;--screen:#202620;--paper:#121612;--frame:#30372e;--rule:#536052;--technical:#a9b3a3;--caption:#9aa592;--board:#9aa592;--hover:#303b2e;--frame-hover:#454f41;color-scheme:dark}
+canvas{filter:invert(1)}.report-link.report-link{color:#cbd1c5}}
 .live .details-page,.lab .live-page,.devlog .live-page{display:none}
-.identity-tools{display:grid;justify-items:start;gap:2px}
 </style>

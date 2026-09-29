@@ -1,8 +1,8 @@
 {
-  "version": "0.12.10-terra",
-  "firmware": "0.12.10-terra",
+  "version": "0.12.11-terra",
+  "firmware": "0.12.11-terra",
   "flash_kib": "31.1",
-  "static_ram": 1492,
+  "static_ram": 1493,
   "free_kib": "0.4",
   "flash_pct": "98.7",
   "chat_enabled": false

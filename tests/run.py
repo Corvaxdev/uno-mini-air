@@ -17,7 +17,7 @@ def main():
     env['TMPDIR'] = str(out)
     cxx = env.get('CXX', 'g++')
     flags = ['-std=c++17', '-O1', '-g', '-fsanitize=address,undefined',
-             '-fno-omit-frame-pointer']
+             '-fno-omit-frame-pointer', '-fno-pie', '-no-pie']
     # Header function comes from the current sketch, not a copied implementation.
     sketch = (ROOT/'firmware/UnoMiniEthernet/UnoMiniEthernet.ino').read_text()
     header = sketch[sketch.index('uint16_t header('):sketch.index('__attribute__((noinline)) uint16_t jsonResponse')]
@@ -35,6 +35,8 @@ def main():
         ('shelters', ROOT/'tests/shelters.cpp', []),
         ('placement', ROOT/'tests/placement.cpp', []),
         ('http', ROOT/'tests/http.cpp', []),
+        ('journal', ROOT/'tests/journal.cpp', []),
+        ('journal-faults', ROOT/'tests/journal-faults.cpp', []),
         ('header', out/'header.cpp', [])]:
         exe = out/name
         subprocess.run([cxx, *flags, str(source), '-o', str(exe)], env=env, check=True)

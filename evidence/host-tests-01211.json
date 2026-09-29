@@ -1,0 +1,29 @@
+{
+  "terra": [
+    "PASS invariants, pond, shelter, night debounce, fallback, action validation, cooldown, credits, capacity, snapshot bounds, reader independence, millis wrap; sizeof(Terra)=584"
+  ],
+  "air": [
+    "PASS 656470 air arithmetic cases; max CO2 step bounded; invalid input fallback; monotonic responses; light dose tested separately."
+  ],
+  "light": [
+    "PASS 519494 arithmetic/dose/night/cycle checks; normal7-day peak debt=91; host sizeof=584"
+  ],
+  "shelters": [
+    "PASS 2048 direct MCU action cases;64 refuge cells reject predators, allow herbivores; rejected actions cost0"
+  ],
+  "placement": [
+    "PASS 6144 placement cases; all 1024 cells, three actions, normal/empty reserve; 24 water cells; shoreline clipping; toroidal edges; no cost/cooldown on rejection"
+  ],
+  "http": [
+    "PASS seven GET routes, 4096 action codes, retired Guide route"
+  ],
+  "journal": [
+    "PASS: 1024 commits / 8 ring cycles; 4608 torn-write cases; 64 corrupt-record cases; interval, wrap, busy, unchanged, saturation, snapshot, readback failure."
+  ],
+  "journal-faults": [
+    "PASS 1674 persistent-fault cases: every byte/slot, deferred retry, wrap, protected checkpoint, reboot, recovery, empty failed store; <=1 byte write/tick."
+  ],
+  "header": [
+    "PASS 720 header cases: freshness, zero/max values, body length, buffer guards"
+  ]
+}

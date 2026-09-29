@@ -1,0 +1,52 @@
+{
+  "version": "0.12.11-terra",
+  "changes": [
+    "Hidden LIVE polling pauses; one loop resumes on visibility",
+    "Animal placement checks occupied/full snapshots",
+    "Reset clears event DOM; selection hints persist",
+    "EEPROM failures advance at15min intervals, protect latest valid slot",
+    "CSS-only automatic theme"
+  ],
+  "production": {
+    "flash_bytes": 32238,
+    "static_ram_bytes": 1493,
+    "gzip_bytes": 11347,
+    "http_buffer": 512,
+    "world_snapshot": 480
+  },
+  "browser_checks": [
+    "LIVE hidden: zero requests; visible: one immediate plus one periodic request",
+    "in-flight LIVE response while hidden does not restart polling",
+    "Terra visibility pause/resume",
+    "occupied cell blocks animals only; movement restores buttons without reselection",
+    "full animal capacity blocks animals, allows seeds",
+    "all 127 packed animal entries detected, including byte boundaries",
+    "world reset clears old DOM events and rebaselines deltas",
+    "48 route/viewport/theme checks including live system-theme changes",
+    "pagehide/pageshow persisted lifecycle resumes one polling loop"
+  ],
+  "general_browser_checks": 32,
+  "eeprom": {
+    "persistent_fault_cases": 1674,
+    "torn_write_cases": 4608,
+    "corrupt_record_cases": 64,
+    "normal_commits": 1024,
+    "faults": "host simulation; not physical EEPROM wear"
+  },
+  "post_upload": {
+    "external_routes": [
+      "/",
+      "/terra",
+      "/lab",
+      "/devlog"
+    ],
+    "exact_asset_hashes": true,
+    "public_retries": 0,
+    "sensor_samples": 6,
+    "uptime_first_s": 10,
+    "uptime_last_s": 86,
+    "humidity_present_all": true,
+    "world_advancing": true
+  },
+  "scope": "Functional checks; no new load-capacity benchmark. Historical load failure remains unresolved."
+}

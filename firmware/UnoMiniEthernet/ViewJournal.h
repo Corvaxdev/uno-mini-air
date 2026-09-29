@@ -12,12 +12,12 @@ public:
   uint32_t saved=0;
 
   void begin(uint32_t now) {
-    total=saved=0;next=0;phase=0;at=now;
+    total=saved=0;next=0;phase=0;last=255;at=now;
     uint8_t r[8];
     for(uint8_t slot=0;slot<128;++slot) {
       read(slot,r);
       if(valid(slot,r) && value(r)>saved) {
-        total=saved=value(r);next=(slot+1)&127;
+        total=saved=value(r);last=slot;next=(slot+1)&127;
       }
     }
   }
@@ -43,15 +43,18 @@ public:
     else if(phase==9)Store::update(base+7,record[7]); // Publish last.
     else {
       uint8_t check[8];read(next,check);phase=0;
-      if(!valid(next,check)||value(check)!=value(record))return -1;
-      saved=value(record);next=(next+1)&127;return 1;
+      bool ok=valid(next,check)&&value(check)==value(record);
+      if(ok){saved=value(record);last=next;}
+      // A bad slot must not pin the journal; never overwrite the latest good one.
+      next=(next+1)&127;if(next==last)next=(next+1)&127;
+      return ok?1:-1;
     }
     ++phase;return 0;
   }
 private:
   uint32_t at=0;
   uint8_t record[8];
-  uint8_t next=0,phase=0;
+  uint8_t next=0,phase=0,last=255;
   static uint32_t value(const uint8_t* r) {
     return uint32_t(r[0])|(uint32_t(r[1])<<8)|(uint32_t(r[2])<<16)|(uint32_t(r[3])<<24);
   }

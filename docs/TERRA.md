@@ -128,3 +128,8 @@ Current Terra capacity has not been established by those older tests.
 ## Placement / 0.12.10
 
 Select a dry cell for every visitor action. A water-centred seed command is rejected, even if its 3x3 footprint reaches land. A land-centred footprint skips water. Animals cannot enter water; predators cannot enter shelters. Rejection costs no reserve or cooldown. HTTP 202 acknowledges the queue; the next snapshot reports the result.
+
+
+## Browser reliability / 0.12.11
+
+Animal buttons reject occupied cells and full capacity from the latest snapshot; seeds do not consume animal slots. The MCU validates again when applying the queued command. World reset clears the event display and counter baseline. LIVE polling pauses while hidden; automatic theme follows CSS media queries.

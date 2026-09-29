@@ -35,11 +35,13 @@ def main():
         ('shelters', ROOT/'tests/shelters.cpp', []),
         ('placement', ROOT/'tests/placement.cpp', []),
         ('http', ROOT/'tests/http.cpp', []),
+        ('rx-race', ROOT/'tests/rx-race.cpp', []),
         ('journal', ROOT/'tests/journal.cpp', []),
         ('journal-faults', ROOT/'tests/journal-faults.cpp', []),
         ('header', out/'header.cpp', [])]:
         exe = out/name
-        subprocess.run([cxx, *flags, str(source), '-o', str(exe)], env=env, check=True)
+        includes = ['-I', str(ROOT/'tests/rx-stubs')] if name == 'rx-race' else []
+        subprocess.run([cxx, *flags, *includes, str(source), '-o', str(exe)], env=env, check=True)
         p = subprocess.run([str(exe), *extra], env=env, text=True, capture_output=True)
         (out/(name+'.log')).write_text(p.stdout+p.stderr)
         if p.returncode:

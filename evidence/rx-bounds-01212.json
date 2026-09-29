@@ -1,0 +1,20 @@
+{
+  "version": "0.12.12-terra",
+  "production": {
+    "flash_bytes": 32224,
+    "static_ram_bytes": 1493,
+    "gzip_bytes": 11348
+  },
+  "host_cases": 81962,
+  "hardware_fragmented_requests": 24,
+  "sensor_observation": {
+    "samples": 31,
+    "bad_samples": 0,
+    "first_uptime_s": 5,
+    "last_uptime_s": 306
+  },
+  "page_hashes_verified": 4,
+  "world_advancing": true,
+  "counter_history": "A previously corrupted checkpoint needs installation-specific recovery; firmware patch alone does not repair historical counts.",
+  "scope": "Functional regression checks, not new load-capacity measurements."
+}

@@ -42,8 +42,8 @@ flowchart LR
 
 | Build | Application Flash / 32,256 B | Static SRAM / 2,048 B | Embedded gzip |
 |---|---:|---:|---:|
-| Deployed 0.12.11-terra reference | 32,238 B | 1,493 B | 11,347 B |
-| Public source edition | 31,822 B | 1,493 B | 10,930 B |
+| Deployed 0.12.12-terra reference | 32,224 B | 1,493 B | 11,348 B |
+| Public source edition | 31,806 B | 1,493 B | 10,930 B |
 
 The remaining 555 bytes after reference globals must also accommodate the
 stack and interrupts. It is not all available for new arrays. A prior
@@ -52,7 +52,7 @@ a measurement, not a worst-case proof. See [evidence and limits](evidence/README
 
 Build hashes: [public-build.json](evidence/public-build.json).
 
-Production has 18 B of application Flash headroom; this public build has 434 B.
+Production has 32 B of application Flash headroom; this public build has 450 B.
 
 The public edition has example networking, no analytics or search-ownership
 tags, and an origin-relative canonical URL. It is **not byte-identical** to
@@ -80,7 +80,7 @@ Installed drivers:
 - Trema temperature/humidity **I2C module at 0x20** (module model 5). This
   firmware speaks the module protocol, not a bare Sensirion SHT3x protocol.
   Configure the module address separately; runtime code does not rewrite it.
-- Trema light I2C module at **0x09**.
+- Trema light I2C module at **0x49**.
 - BMP085/BMP180 at **0x77**, chip ID 0x55.
 - MH-Z14A **400–5000 ppm**, PWM; allow its warm-up and specified power supply.
 

@@ -39,7 +39,8 @@ struct AirSocket {
     SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
     uint16_t n=0;
     if(!W5100.readSnCR(s)) {
-      n=min(size(s,false),capacity);
+      // Sample once: Arduino min() would evaluate a changing RX count twice.
+      n=size(s,false);if(n>capacity)n=capacity;
       if(n) {
         uint16_t p=W5100.readSnRX_RD(s);
         W5100.read(W5100.RBASE(s)+(p&W5100.SMASK),data,n);

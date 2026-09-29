@@ -24,3 +24,6 @@ Placement fix 0.12.10: see [checks](placement-01210.json). Diagrams, day/night i
 
 
 0.12.11: [reliability checks](reliability-01211.json) and [nine host test groups](host-tests-01211.json). Current build sizes are in the root README.
+
+
+0.12.12: [RX bound evidence](rx-bounds-01212.json) and [cause and fix](../docs/RX-BOUNDS.md).

@@ -9,18 +9,18 @@ class MiniSHT {
 public:
   int16_t temperature10=0;
   uint16_t humidity10=0;
-  uint32_t samples=0,errors=0,sampleAt=0;
+  uint32_t sampleAt=0;
   void invalidate() {valid=false;}
   bool fresh() const {return valid && uint32_t(millis()-sampleAt)<15000UL;}
   bool tick() {
     uint32_t now=millis();if(int32_t(now-due)<0)return false;due=now+5000UL;
     uint8_t b[4];
     // Recheck identity every cycle: fail closed on address collision/replacement.
-    if(!read(0x04,b,4)||b[0]!=5||b[3]!=0x3C||!read(0x11,b,4)){valid=false;++errors;return false;}
+    if(!read(0x04,b,4)||b[0]!=5||b[3]!=0x3C||!read(0x11,b,4)){valid=false;return false;}
     int16_t t=(uint16_t(b[1]&0x7F)<<8)|b[0];if(b[1]&0x80)t=-t;
     uint16_t h=(uint16_t(b[3])<<8)|b[2];
-    if(t < -400 || t > 1250 || h>1000){valid=false;++errors;return false;}
-    temperature10=t;humidity10=h;sampleAt=millis();valid=true;++samples;return true;
+    if(t < -400 || t > 1250 || h>1000){valid=false;return false;}
+    temperature10=t;humidity10=h;sampleAt=millis();valid=true;return true;
   }
 private:
   bool valid=false;

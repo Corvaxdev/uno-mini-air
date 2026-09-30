@@ -11,7 +11,7 @@ public:
   int16_t temperature10=0;
   int32_t pressurePa=0;
   uint16_t rawTemperature=0;
-  uint32_t samples=0, errors=0, sampleAt=0, maxCycleMs=0;
+  uint32_t sampleAt=0;
   bool valid=false;
   static bool compensate(const int16_t* c,uint16_t ut,uint32_t up,uint8_t oss,int16_t& t,int32_t& p) {
     if(oss>3 || up>(65536UL<<oss)-1)return false;
@@ -78,8 +78,7 @@ public:
     const uint32_t rawPressure=((uint32_t(b[0])<<16)|(uint16_t(b[1])<<8)|b[2])>>(8-OSS);
     int16_t t;int32_t p;
     if(!compensate(calibration,rawTemperature,rawPressure,OSS,t,p)){fail();return false;}
-    temperature10=t;pressurePa=p;valid=true;++samples;sampleAt=millis();
-    maxCycleMs=max(maxCycleMs,uint32_t(sampleAt-cycleAt));
+    temperature10=t;pressurePa=p;valid=true;sampleAt=millis();
     stage=0;due=cycleAt+5000UL;return true;
   }
 private:
@@ -103,5 +102,5 @@ private:
     for(uint8_t i=3;i<6;++i)if(!calibration[i]||uint16_t(calibration[i])==0xFFFF)return false;
     initialized=true;return true;
   }
-  void fail() {valid=false;initialized=false;stage=0;++errors;due=millis()+5000UL;}
+  void fail() {valid=false;initialized=false;stage=0;due=millis()+5000UL;}
 };

@@ -1,5 +1,13 @@
 # Changes
 
+## 0.12.13-terra
+
+- HTTP responses use a four-second progress timeout and a twelve-second total cap, allowing slow complete page transfers.
+- Expired world-action cooldowns are rebased so they do not recur after millis() rollover.
+- Browser action results apply only to an awaited command; a new cell keeps its own terrain hint.
+- Remove unused sensor diagnostic counters: 28 B less static SRAM; 30,000 differential cases preserve acquisition behaviour.
+- Add HTTP timing, timer rollover, sensor failures, I2C recovery and arithmetic regression groups.
+
 ## 0.12.12-terra
 
 - Fix an RX buffer overflow: sample the W5500 receive count once before limiting the copy. Arduino min() previously read a changing count twice.

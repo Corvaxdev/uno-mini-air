@@ -1,9 +1,9 @@
 {
-  "version": "0.12.12-terra",
-  "firmware": "0.12.12-terra",
-  "flash_kib": "31.1",
-  "static_ram": 1493,
-  "free_kib": "0.4",
-  "flash_pct": "98.6",
+  "version": "0.12.13-terra",
+  "firmware": "0.12.13-terra",
+  "flash_kib": "30.9",
+  "static_ram": 1465,
+  "free_kib": "0.6",
+  "flash_pct": "98.1",
   "chat_enabled": false
 }

@@ -184,7 +184,10 @@ struct Terra {
   }
   TERRA_FN void tick(uint32_t now) {
     if(now-creditAt>=600000UL){uint32_t n=(now-creditAt)/600000UL;credits=n>=uint8_t(12-credits)?12:credits+n;creditAt+=n*600000UL;}
-    if(!phase){if(!due(now))return;at=now;apply(now);
+    if(!phase){if(!due(now))return;at=now;
+      // Expire the old timestamp so cooldown cannot recur after millis wraps.
+      if(uint32_t(now-acceptedAt)>=60000UL)acceptedAt=now-60000UL;
+      apply(now);
       if((flags&1)&&(generation&31)){++generation;return;} // Night work at1/32 rate, never frozen.
       cursor=random()&1023;stride=(random()&1023)|1;progress=0;phase=1;
     }

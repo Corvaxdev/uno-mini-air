@@ -1,0 +1,61 @@
+{
+  "version": "0.12.13-terra",
+  "host_groups": 15,
+  "http_timing_cases": 126,
+  "cooldown_assertions": 3006507,
+  "sensor_driver_differential_cases": 30000,
+  "barometer_arithmetic_cases": 3310720,
+  "browser": {
+    "action_feedback": true,
+    "regression": [
+      "LIVE hidden: zero requests; visible: one immediate plus one periodic request",
+      "in-flight LIVE response while hidden does not restart polling",
+      "Terra visibility pause/resume",
+      "occupied cell blocks animals only; movement restores buttons without reselection",
+      "full animal capacity blocks animals, allows seeds",
+      "all 127 packed animal entries detected, including byte boundaries",
+      "world reset clears old DOM events and rebaselines deltas",
+      "48 route/viewport/theme checks including live system-theme changes",
+      "pagehide/pageshow persisted lifecycle resumes one polling loop"
+    ],
+    "errors": []
+  },
+  "hardware": {
+    "passed": true,
+    "sensor_samples": 31,
+    "duration_seconds": 301,
+    "page_hashes_checked": [
+      "/",
+      "/terra",
+      "/lab",
+      "/devlog"
+    ],
+    "world_advanced": true,
+    "counter_survived_upload": true
+  },
+  "internet": {
+    "scope": "One Amsterdam VPS, 4 mixed workers, 90 seconds, 5-second interval, no retries; concurrent LAN health monitor. Not a capacity limit.",
+    "requests": 80,
+    "successful": 80,
+    "slow_receiver": {
+      "ok": true,
+      "body_bytes": 11399,
+      "elapsed_ms": 5867.5,
+      "recv_buffer_actual": 2304,
+      "read_bytes": 256,
+      "pause_ms": 120
+    }
+  },
+  "production": {
+    "flash_bytes": 32076,
+    "static_ram_bytes": 1465,
+    "gzip_bytes": 11399,
+    "gzip_sha256": "0df8729bf57271c7e3b620775a232d8e31ae751c66c61399667573d9121dcc38"
+  },
+  "limits": [
+    "No new peak client-capacity result",
+    "No new AVR peak stack measurement",
+    "No electrical fault injection or weeks-long uptime test",
+    "Native sanitizers do not emulate AVR stack depth"
+  ]
+}

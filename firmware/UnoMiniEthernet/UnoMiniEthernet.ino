@@ -194,7 +194,7 @@ void httpTick() {
   if(p.pending) {
     int8_t sent=AirSocket::sent(s);
     if(sent<0) {dropPeer(s);return;}
-    if(sent>0)p.pending=false;
+    if(sent>0){p.pending=false;p.at=now;}
   }
   if(status==SnSR::CLOSED) {
     // A cleared command register is not proof that OPEN has completed.
@@ -235,7 +235,10 @@ void httpTick() {
   if(p.phase==HttpPeer::RELEASING) {
     if(now-p.at>1000UL)resetNetwork();return;
   }
-  if(now-p.at>(p.phase==HttpPeer::READING?1500UL:4000UL)) {dropPeer(s);return;}
+  // Reuse the consumed header byte count as a 16-bit response start clock.
+  // Acknowledged blocks refresh the idle limit; total lifetime stays bounded.
+  if(p.phase==HttpPeer::READING?now-p.at>1500UL:
+      now-p.at>4000UL || uint16_t(now-p.request.bytes)>12000U) {dropPeer(s);return;}
   if(status!=SnSR::ESTABLISHED && status!=SnSR::CLOSE_WAIT)return;
   if(p.pending)return;
   if(p.phase==HttpPeer::READING) {
@@ -244,7 +247,7 @@ void httpTick() {
       int8_t result=p.request.feed(buffer[i]);
       if(result<0) {dropPeer(s);return;}
       if(result>0) {
-        p.route=p.request.route();p.phase=HttpPeer::RESPONSE;p.at=now;return;
+        p.route=p.request.route();p.phase=HttpPeer::RESPONSE;p.at=now;p.request.bytes=uint16_t(now);return;
       }
     }
     if(!n && status==SnSR::CLOSE_WAIT)dropPeer(s);

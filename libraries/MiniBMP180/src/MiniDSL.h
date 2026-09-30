@@ -8,16 +8,16 @@
 class MiniDSL {
 public:
   uint16_t lux=0;
-  uint32_t samples=0,errors=0,sampleAt=0;
+  uint32_t sampleAt=0;
   void invalidate() {valid=false;}
   bool fresh() const {return valid && uint32_t(millis()-sampleAt)<15000UL;}
   bool tick() {
     uint32_t now=millis();if(int32_t(now-due)<0)return false;due=now+5000UL;
     uint8_t b[4];
-    if(!read(0x04,b,4)||b[0]!=6||b[3]!=0x3C||!read(0x11,b,2)){valid=false;++errors;return false;}
+    if(!read(0x04,b,4)||b[0]!=6||b[3]!=0x3C||!read(0x11,b,2)){valid=false;return false;}
     uint16_t value=(uint16_t(b[1])<<8)|b[0];
-    if(value>8191){valid=false;++errors;return false;}
-    lux=value;sampleAt=millis();valid=true;++samples;return true;
+    if(value>8191){valid=false;return false;}
+    lux=value;sampleAt=millis();valid=true;return true;
   }
 private:
   bool valid=false;

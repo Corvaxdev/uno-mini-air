@@ -1,14 +1,14 @@
 {
-  "version": "0.12.12-terra",
+  "version": "0.12.13-terra",
   "edition": "public-source",
   "cli": "1.5.1",
   "core": "arduino:avr@1.8.8",
-  "flash_bytes": 31806,
-  "static_ram_bytes": 1493,
+  "flash_bytes": 31652,
+  "static_ram_bytes": 1465,
   "uploaded": false,
-  "gzip_bytes": 10930,
+  "gzip_bytes": 10975,
   "sha256": {
-    "site.html.gz": "7257ed3ee9faab492e832a6bad71fafe1cb83fd7f7e0801082e28ba89d92368b",
-    "UnoMiniEthernet.ino.hex": "37d7c317860ec5b7e71624a4e675ff6cf03b8140c310de42e93324104652754c"
+    "site.html.gz": "59471af34f6c02da64ebf83b5c9ff1ed204e4df89aa5141c677ba9fdfd50d5ce",
+    "UnoMiniEthernet.ino.hex": "ac2e873b4dec45d98291bfb059a5b6cfd35484be29b34b99a546eba041270f98"
   }
 }

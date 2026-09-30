@@ -1,10 +1,10 @@
 # Measurement scope
 
-- `public-build.json`: independently compiled public 0.12.10 source, example
+- `public-build.json`: independently compiled public 0.12.13 source, example
   network and no deployment analytics. It is not the deployed binary.
 - `source-parity.json`: normalized source hashes matching the deployed runtime;
   network constants are intentionally substituted. Assets are separately rebuilt.
-- `host-tests.json`: current ASAN/UBSAN suite, including light dose, shelters and water placement.
+- `host-tests-01213.json`: current 15-group ASAN/UBSAN suite. Older host-test files retain their original scope.
 - `model-0129/`: accepted current model, seeds 201..220 (201..210 for 10-run
   cases), no visitor actions. Three ordinary 72-hour room cycles: 48/50 coexist,
   two predator extinctions, no full collapse. Extreme runs can collapse.
@@ -27,3 +27,5 @@ Placement fix 0.12.10: see [checks](placement-01210.json). Diagrams, day/night i
 
 
 0.12.12: [RX bound evidence](rx-bounds-01212.json) and [cause and fix](../docs/RX-BOUNDS.md).
+
+0.12.13: [audit](../docs/RELIABILITY-01213.md), [deployed checks](reliability-01213.json), and [15 host groups](host-tests-01213.json). The external test is a bounded smoke test, not a new capacity benchmark.

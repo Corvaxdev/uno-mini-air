@@ -42,17 +42,20 @@ flowchart LR
 
 | Build | Application Flash / 32,256 B | Static SRAM / 2,048 B | Embedded gzip |
 |---|---:|---:|---:|
-| Deployed 0.12.12-terra reference | 32,224 B | 1,493 B | 11,348 B |
-| Public source edition | 31,806 B | 1,493 B | 10,930 B |
+| Deployed 0.12.13-terra reference | 32,076 B | 1,465 B | 11,399 B |
+| Public source edition | 31,652 B | 1,465 B | 10,975 B |
 
-The remaining 555 bytes after reference globals must also accommodate the
-stack and interrupts. It is not all available for new arrays. A prior
-instrumented 128-animal run observed a 413-byte minimum stack gap; this is
+The remaining 583 bytes after reference globals must also accommodate the
+stack and interrupts. It is not all available for new arrays. An instrumented **0.12.3**
+128-animal run observed a 413-byte minimum stack gap; this is
 a measurement, not a worst-case proof. See [evidence and limits](evidence/README.md).
 
 Build hashes: [public-build.json](evidence/public-build.json).
 
-Production has 32 B of application Flash headroom; this public build has 450 B.
+Production has 180 B of application Flash headroom; this public build has 604 B.
+
+[0.12.13 reliability audit](docs/RELIABILITY-01213.md): HTTP deadlines, clock rollover,
+action feedback, sensor fault tests and deployed checks.
 
 The public edition has example networking, no analytics or search-ownership
 tags, and an origin-relative canonical URL. It is **not byte-identical** to
